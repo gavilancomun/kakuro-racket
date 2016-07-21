@@ -22,9 +22,10 @@
   (emptycell))
 
 (define (v . values) 
-  (if (= 0 (length values))
-    (valuecell (set 1 2 3 4 5 6 7 8 9))
-    (valuecell (apply set values))))
+  (valuecell
+    (if (= 0 (length values))
+      (set 1 2 3 4 5 6 7 8 9)
+      (apply set values))))
 
 (define (pad2 n)
   (let ([s (number->string n)])
