@@ -19,6 +19,7 @@
     (check-equal? 10 (length results))
     (let ([diff (filter all-different results)])
       (check-equal? 6 (length diff)))))
+
 (test-case
   "transpose"
   (let* ([ints '((1 2 3 4) (1 2 3 4) (1 2 3 4))]
@@ -27,4 +28,13 @@
     (display tr)
     (check-equal? (length ints) (length (first tr)))
     (check-equal? (length (first ints)) (length tr))))
+
+(test-case
+  "lists"
+  (let* ([a '(1 2 3)]
+         [b '(4 5 6 1 2 3)])
+    (check-equal? 4 (length (takef '(0 1 2 3 4 5 6 7 8 9) (lambda (n) (< n 4)))))
+    (check-equal? 9 (length (append a b)))
+    (check-equal? 2 (length (drop b 4)))
+    (check-equal? 4 (length (take b 4)))))
 
