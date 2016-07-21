@@ -54,4 +54,23 @@
 (define (drawRow row)
   (string-append (apply string-append (map (lambda (cell) (draw cell)) row)) "\n"))
 
+(define (all-different nums)
+  (= (length nums) (set-count (apply set nums))))
+
+(define (conj coll item)
+  (append coll (list item)))
+
+(define (permute vs target so-far)
+  (if (>= target 1)
+    (if (= (length so-far) (- (length vs) 1))
+      (list (conj so-far target))
+      (let* ([t1 (list-ref vs (length so-far))]
+             [t2 (set->list (valuecell-values t1))]
+             [t3 (map (lambda (x) (permute vs (- target x) (conj so-far x))) t2)])
+        (apply append t3)))
+    (list)))
+
+(define (permute-all vs total)
+  (permute vs total (list)))
+
 (provide (all-defined-out))
