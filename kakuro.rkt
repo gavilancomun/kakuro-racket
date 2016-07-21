@@ -51,7 +51,7 @@
     [(downacrosscell d a) (string-append "   " (pad2 d) "\\" (pad2 a) "  ")]
     [(valuecell vs) (drawvalues vs)]))
 
-(define (drawRow row)
+(define (draw-row row)
   (string-append (apply string-append (map (lambda (cell) (draw cell)) row)) "\n"))
 
 (define (all-different nums)
@@ -72,5 +72,8 @@
 
 (define (permute-all vs total)
   (permute vs total (list)))
+
+(define (transpose m)
+  (apply (curry map list) m))
 
 (provide (all-defined-out))
