@@ -16,18 +16,20 @@
   (downcell down))
 
 (define (a across)
-  (acrosscell a))
+  (acrosscell across))
 
 (define (e)
   (emptycell))
 
-(define (v) 
-  (valuecell (set 1 2 3 4 5 6 7 8 9)))
+(define (v . values) 
+  (if (= 0 (length values))
+    (valuecell (set 1 2 3 4 5 6 7 8 9))
+    (valuecell (apply set values))))
 
 (define (pad2 n)
   (let ([s (number->string n)])
-    (if (= 1 (length s))
-      (string-append "0" s)
+    (if (= 1 (string-length s))
+      (string-append " " s)
       s)))
 
 (define (drawvalue vs v)
@@ -36,9 +38,9 @@
     "."))
 
 (define (drawvalues vs)
-  (if (= 1 (length vs))
-    (string-append "     " (first vs) "    ")
-    (apply string-append (map (lambda (x) (drawvalue vs x)) vs))))
+  (if (= 1 (set-count vs))
+    (string-append "     " (number->string (first (set->list vs))) "    ")
+    (apply string-append " " (map (lambda (x) (drawvalue vs x)) (list 1 2 3 4 5 6 7 8 9)))))
 
 (define (draw cell)
   (match cell
@@ -49,6 +51,6 @@
     [(valuecell vs) (drawvalues vs)]))
 
 (define (drawRow row)
-  (apply string-append (map (lambda (cell) (draw cell)) row)))
+  (string-append (apply string-append (map (lambda (cell) (draw cell)) row)) "\n"))
 
 (provide (all-defined-out))
