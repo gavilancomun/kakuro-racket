@@ -86,4 +86,20 @@
          [perms3 (filter all-different perms2)])
     (map (lambda (x) (apply v x)) (transpose perms3))))
 
+(define (partition-by f coll)
+  (if (= 0 (length coll))
+    (list)
+    (let* ([head (first coll)]
+           [fx (f head)]
+           [group (takef coll (lambda (y) (equal? fx (f y))))])
+      (append (list group) (partition-by f (drop coll (length group)))))))
+
+(define (partition-all n step coll)
+  (if (= 0 (length coll))
+    coll
+    (append (list (take coll (min n (length coll)))) (partition-all n step (drop coll (min step (length coll)))))))
+
+(define (gather-values line)
+  (partition-by valuecell? line))
+
 (provide (all-defined-out))

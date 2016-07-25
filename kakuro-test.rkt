@@ -50,3 +50,27 @@
              (check-equal? (v 1 2) (first result))
              (check-equal? (v 3 4) (second result))))
 
+(test-case "partby"
+    (let* ([data (list 1 2 2 2 3 4 5 5 6 7 7 8 9)]
+    [result (partition-by (lambda (n) (= 0 (remainder n 2))) data)])
+    (printf "partby")
+    (display result)
+    (check-equal? 9 (length result))))
+
+(test-case "partall"
+    (let* ([data (list 1 2 2 2 3 4 5 5 6 7 7 8 9)]
+    [result (partition-all 5 3 data)])
+    (printf "partall")
+    (display result)
+    (check-equal? 5 (length result))))
+
+(test-case "gather"
+  (let* ([line (list (da 3 4) (v) (v) (d 4) (e) (a 4) (v) (v))]
+        [result (gather-values line)])
+    (printf "gather ")
+    (display result)
+    (check-equal? 4 (length result))
+    (check-equal? (da 3 4) (first (first result)))
+    (check-equal? (d 4) (first (first (rest (rest result)))))
+    (check-equal? (e) (second (first (rest (rest result)))))
+    (check-equal? (a 4) (first (rest (rest (first (rest (rest result)))))))))
