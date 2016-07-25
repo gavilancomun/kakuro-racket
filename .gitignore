@@ -10,3 +10,7 @@
 *~
 *.swp
 
+#Racket
+compiled/
+*.bak
+
