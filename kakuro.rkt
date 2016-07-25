@@ -102,4 +102,7 @@
 (define (gather-values line)
   (partition-by valuecell? line))
 
+(define (pair-targets-with-values line)
+  (partition-all 2 2 (gather-values line)))
+
 (provide (all-defined-out))

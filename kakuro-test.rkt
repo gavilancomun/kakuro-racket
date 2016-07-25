@@ -74,3 +74,14 @@
     (check-equal? (d 4) (first (first (rest (rest result)))))
     (check-equal? (e) (second (first (rest (rest result)))))
     (check-equal? (a 4) (first (rest (rest (first (rest (rest result)))))))))
+
+(test-case "pair targets"
+  (let* ([line (list (da 3 4) (v) (v) (d 4) (e) (a 4) (v) (v))]
+        [result (pair-targets-with-values line)])
+    (printf "pair ")
+    (display result)
+    (check-equal? 2 (length result))
+    (check-equal? (da 3 4) (first (first (first result))))
+    (check-equal? (d 4) (first (first (second result))))
+    (check-equal? (e) (second (first (second result))))
+    (check-equal? (a 4) (first (rest (rest (first (second result))))))))
