@@ -38,3 +38,8 @@
     (check-equal? 2 (length (drop b 4)))
     (check-equal? 4 (length (take b 4)))))
 
+(test-case "isposs"
+           (let* ([vc (v 1 2 3)])
+             (check-equal? true (is-possible? vc 2))
+             (check-equal? false (is-possible? vc 4))))
+

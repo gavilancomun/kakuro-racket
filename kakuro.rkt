@@ -76,4 +76,9 @@
 (define (transpose m)
   (apply (curry map list) m))
 
+
+(define (is-possible? cell n)
+  (set-member? (valuecell-values cell) n))
+
+
 (provide (all-defined-out))
