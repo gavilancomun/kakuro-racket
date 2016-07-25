@@ -85,3 +85,14 @@
     (check-equal? (d 4) (first (first (second result))))
     (check-equal? (e) (second (first (second result))))
     (check-equal? (a 4) (first (rest (rest (first (second result))))))))
+
+(test-case "solve pair"
+  (let* ([line (list (da 3 4) (v) (v) (d 4) (e) (a 4) (v) (v))]
+        [pairs (pair-targets-with-values line)]
+        [pair (first pairs)]
+        [result (solve-pair down pair)])
+    (printf "solvePair ")
+    (display result)
+    (check-equal? 3 (length result))
+    (check-equal? (v 1 2) (second result))
+    (check-equal? (v 1 2) (list-ref result 2))))

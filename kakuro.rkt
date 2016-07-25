@@ -105,4 +105,23 @@
 (define (pair-targets-with-values line)
   (partition-all 2 2 (gather-values line)))
 
+(define (down x)
+  (match x
+         [(downcell d) d]
+         [(downacrosscell d a) d]
+         [_ 0]))
+
+(define (across x)
+  (match x
+         [(acrosscell n) n]
+         [(downacrosscell d a) a]
+         [_ 0]))
+
+(define (solve-pair f pair)
+  (let* ([nvs (first pair)])
+    (if (< (length pair) 2)
+      nvs
+      (let* ([vs (second pair)])
+        (append nvs (solve-step vs (f (last nvs))))))))
+
 (provide (all-defined-out))
