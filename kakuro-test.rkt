@@ -43,3 +43,10 @@
              (check-equal? true (is-possible? vc 2))
              (check-equal? false (is-possible? vc 4))))
 
+(test-case "solvestep"
+           (let ([result (solve-step (list (v 1 2) (v)) 5)])
+             (printf "solve step result ")
+             (display result)
+             (check-equal? (v 1 2) (first result))
+             (check-equal? (v 3 4) (second result))))
+

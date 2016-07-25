@@ -6,7 +6,7 @@
 (struct acrosscell (across))
 (struct downcell (down))
 (struct downacrosscell (down across))
-(struct valuecell (values))
+(struct valuecell (values) #:transparent)
 (struct emptycell ())
 
 (define (da down across)
@@ -76,9 +76,14 @@
 (define (transpose m)
   (apply (curry map list) m))
 
-
 (define (is-possible? cell n)
   (set-member? (valuecell-values cell) n))
 
+(define (solve-step cells total)
+  (let* ([final (- (length cells) 1)]
+         [perms1 (permute-all cells total)]
+         [perms2 (filter (lambda (x) (is-possible? (last cells) (list-ref x final))) perms1)]
+         [perms3 (filter all-different perms2)])
+    (map (lambda (x) (apply v x)) (transpose perms3))))
 
 (provide (all-defined-out))
