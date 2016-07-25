@@ -3,11 +3,11 @@
 (require racket/set)
 
 
-(struct acrosscell (across))
-(struct downcell (down))
-(struct downacrosscell (down across))
+(struct acrosscell (across) #:transparent)
+(struct downcell (down) #:transparent)
+(struct downacrosscell (down across) #:transparent)
 (struct valuecell (values) #:transparent)
-(struct emptycell ())
+(struct emptycell () #:transparent)
 
 (define (da down across)
   (downacrosscell down across))
