@@ -100,7 +100,9 @@
 (define (partition-all n step coll)
   (if (= 0 (length coll))
     coll
-    (append (list (take coll (min n (length coll)))) (partition-all n step (drop coll (min step (length coll)))))))
+    (let ([taken (take coll (min n (length coll)))]
+          [dropped (drop coll (min step (length coll)))])
+      (append (list taken) (partition-all n step dropped)))))
 
 (define (gather-values line)
   (partition-by valuecell? line))
