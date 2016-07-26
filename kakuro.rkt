@@ -124,4 +124,8 @@
       (let* ([vs (second pair)])
         (append nvs (solve-step vs (f (last nvs))))))))
 
+(define (solve-line line f)
+  (let ([pairs (pair-targets-with-values line)])
+    (apply append (map (curry solve-pair f) pairs))))
+
 (provide (all-defined-out))

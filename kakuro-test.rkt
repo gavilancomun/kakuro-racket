@@ -96,3 +96,14 @@
     (check-equal? 3 (length result))
     (check-equal? (v 1 2) (second result))
     (check-equal? (v 1 2) (list-ref result 2))))
+
+(test-case "solve line"
+  (let* ([line (list (da 3 4) (v) (v) (d 4) (e) (a 5) (v) (v))]
+         [result (solve-line line across)])
+    (printf "solve line ")
+    (display result)
+    (check-equal? 8 (length result))
+    (check-equal? (v 1 3) (second result))
+    (check-equal? (v 1 3) (third result))
+    (check-equal? (v 1 2 3 4) (seventh result))
+    (check-equal? (v 1 2 3 4) (eighth result))))
