@@ -54,6 +54,9 @@
 (define (draw-row row)
   (string-append (apply string-append (map (lambda (cell) (draw cell)) row)) "\n"))
 
+(define (draw-grid grid)
+  (apply string-append (map draw-row grid)))
+
 (define (all-different nums)
   (= (length nums) (set-count (apply set nums))))
 
@@ -133,5 +136,18 @@
 
 (define (solve-column column)
   (solve-line column down))
+
+(define (solve-grid grid)
+  (let* ([g1 (map solve-row grid)]
+         [g2 (transpose g1)]
+         [g3 (map solve-column g2)])
+    (transpose g3)))
+
+(define (solver grid)
+  (displayln (draw-grid grid))
+  (let ([g (solve-grid grid)])
+    (if (equal? g grid)
+      g
+      (solver g))))
 
 (provide (all-defined-out))
