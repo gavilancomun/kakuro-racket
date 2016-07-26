@@ -107,3 +107,17 @@
     (check-equal? (v 1 3) (third result))
     (check-equal? (v 1 2 3 4) (seventh result))
     (check-equal? (v 1 2 3 4) (eighth result))))
+
+(test-case "row"
+  (let* ([result (solve-row (list (a 3) (v 1 2 3) (v 1)))])
+    (printf "solve row ")
+    (display result)
+    (check-equal? (v 2) (second result))
+    (check-equal? (v 1) (third result))))
+
+(test-case "col"
+    (let* ([result (solve-column (list (da 3 12) (v 1 2 3) (v 1)))])
+    (print "solve col ")
+    (display result)
+    (check-equal? (v 2) (second result))
+    (check-equal? (v 1) (third result))))

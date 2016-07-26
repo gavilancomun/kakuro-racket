@@ -128,4 +128,10 @@
   (let ([pairs (pair-targets-with-values line)])
     (apply append (map (curry solve-pair f) pairs))))
 
+(define (solve-row row)
+  (solve-line row across))
+
+(define (solve-column column)
+  (solve-line column down))
+
 (provide (all-defined-out))
